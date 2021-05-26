@@ -1,3 +1,4 @@
+'use strict'
 // 1) Переписать функцию-конструктор MyArray на классы. 
 // *Переписать методы unshift, push для неограниченного числа аргументов.
 
@@ -35,8 +36,8 @@ console.group('Classes - task 1');
         };
         unshift() {
             for(let i = arguments.length - 1; i >= 0; i--) {
-                for(let i = this.length; i >= 0; i--) {
-                    this[i] = this[i - 1];
+                for(let j = this.length; j >= 0; j--) {
+                    this[j] = this[j - 1];
                 };
 
                 this[0] = arguments[i];
@@ -148,7 +149,6 @@ console.group('Classes - task 1');
 console.groupEnd();
 
 
-
 // 2) Реализовать класс RangeValidator, со следующими свойствами:
 // ■ from (number);
 // ■ to (number);
@@ -158,6 +158,51 @@ console.groupEnd();
 // в указанный диапазон.
 console.group('Classes - task 2');
 
+    class RangeValidator {
+        constructor(from, to) {
+            this.from = from;
+            this.to = to;
+        };
+        get from() {
+            return this._from;
+        };
+        set from(num) {
+            if ( typeof num !== 'number' || !Number.isSafeInteger(num) ) {
+                throw new TypeError('from - must be an integer number');
+            } else if (num > this.to) {
+                throw new RangeError('from - must be less than parameter to');
+            } else {
+                this._from = num;
+            }
+        };
+        get to() {
+            return this._to;
+        };
+        set to(num) {
+            if ( typeof num !== 'number' || !Number.isSafeInteger(num) ) {
+                throw new TypeError('to - must be an integer number');
+            } else if (num < this.from) {
+                throw new RangeError('to - must be bigger than parameter from');
+            } else {
+                this._to = num;
+            }
+        };
+        getRange() {
+            return [this.from, this.to];
+        };
+        validate(num) {
+            return (num >= this.from && num <= this.to) ? 'value is entered to this range' 
+            : 'value isn`t entered to this range'
+        };
+    };
 
+    const range1 = new RangeValidator(3, 20);
+    range1.from = 10;
+    console.log('range1.from :>> ', range1.from);
+    range1.to = 100;
+    console.log('range1.to :>> ', range1.to);
+
+    console.log('range1.getRange() :>> ', range1.getRange());
+    console.log('range1.validate(12) :>> ', range1.validate(212));
 
 console.groupEnd();
