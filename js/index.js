@@ -36,7 +36,7 @@ console.group('Classes - task 1');
         };
         unshift() {
             for(let i = arguments.length - 1; i >= 0; i--) {
-                for(let j = this.length; j >= 0; j--) {
+                for(let j = this.length; j > 0; j--) {
                     this[j] = this[j - 1];
                 };
 
@@ -117,16 +117,10 @@ console.group('Classes - task 1');
 
         myArr1.push(i);
     };
-    console.log('after push - ', myArr1);
-    myArr1.pop();
-    console.log('after pop - ', myArr1);
-    myArr1.shift();
-    console.log('after shift - ', myArr1);
+
+    console.log('before unshift - ', myArr1);
     myArr1.unshift('unsh');
     console.log('after unshift - ', myArr1);
-
-    const arrArr = myArr1.filter(item => Array.isArray(item));
-    console.log('after filter :>> ', arrArr);
 
     const newArr1 = myArr1.flat();
     console.log('newArr1 >> flat()');
@@ -140,8 +134,8 @@ console.group('Classes - task 1');
     console.log('newArr3 >> flat(2)');
     console.dir(newArr3);
 
-    myArr1.push('TTT', 'UUU', 1000000);
-    console.log('after push (with arguments > 1) :>> ', myArr1);
+
+    console.log('before unshift (with arguments > 1):>> ', myArr1);
 
     myArr1.unshift('TTT', 'UUU', 1000000);
     console.log('after unshift (with arguments > 1) :>> ', myArr1);
@@ -156,7 +150,7 @@ console.groupEnd();
 // Реализовать getter range, который будет возвращать массив с двумя числами диапазона
 // Реализовать метод validate, который будет принимать число и проверить входит ли число 
 // в указанный диапазон.
-console.group('Classes - task 2');
+console.groupCollapsed('Classes - task 2');
 
     class RangeValidator {
         constructor(from, to) {
