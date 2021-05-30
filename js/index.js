@@ -55,7 +55,7 @@ console.group('Classes - task 1');
             }
             return returningArray;
         };
-        flat(n) {
+        flat(n = 1) {
             const superObj = new MyArray();
             const m = n;
     
@@ -68,23 +68,15 @@ console.group('Classes - task 1');
             function flatten(n) {
                 for(let i = 0; i < this.length; i++) {
                     if ( Array.isArray(this[i]) ) {
-                        if (n === undefined) {
-                            const arr = this[i].join(',').split(',');
-        
-                            for (let j = 0; j < arr.length; j++) {
-                                superObj.push(arr[j]);
-                            }; 
-                        } else {
-                            this[i].forEach(item => {
-                                if ( !Array.isArray(item) ) {
-                                    superObj.push(item);
-                                } else if (n === 1) { 
-                                    superObj.push(item);
-                                } else {
-                                    flatten.call(this[i], n - 1);
-                                }
-                            });
-                        };
+                        this[i].forEach(item => {
+                            if ( !Array.isArray(item) ) {
+                                superObj.push(item);
+                            } else if (n === 1) { 
+                                superObj.push(item);
+                            } else {
+                                flatten.call(this[i], n - 1);
+                            }
+                        });
                     } else if (this[i] === ' ') {
                         continue;
                     } else {
